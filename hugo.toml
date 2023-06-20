@@ -1,0 +1,12 @@
+baseURL = 'laces.github.io'
+languageCode = 'en-us'
+title = 'LACES'
+
+theme = "laces-theme"
+
+# for searching https://ruddra.com/add-search-functionality-hugo/
+#[outputs]
+#  home = ["HTML", "JSON", "RSS"]
+
+
+
