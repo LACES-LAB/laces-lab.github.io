@@ -1,6 +1,14 @@
 {{ define "main" }}
 <article class="justify-self-center mx-auto text-center prose dark:prose-invert prose-slate lg:prose-lg">
     <h1 class="font-serif font-extralight text-5xl welcome-headline">{{ .Title }}</h1>
-    {{ .Content }}
+    <div class="grid grid-cols-1 md:gap-4 md:grid-cols-3">
+      <div>
+        <img src="{{.Params.image}}" alt="{{.Params.imagealt}}">
+      </div>
+      <div class="col-span-2">
+        {{ .Content }}
+      </div>
+      
+    </div>
 </article>
 {{ end }}

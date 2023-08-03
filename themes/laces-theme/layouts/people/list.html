@@ -1,0 +1,44 @@
+{{ define "main" }}
+
+{{ with .Site.GetPage "/people/PI" }} 
+{{ if gt (len .Pages) 0 }}
+  <h1 class="text-4xl pb-4"> Principle Investigator </h1>
+  {{ partial "people-list.html" . }}
+  <hr>
+{{ end }}
+{{ end }}
+
+{{ with .Site.GetPage "/people/PhD" }} 
+{{ if gt (len .Pages) 0 }}
+  <h1 class="text-4xl pb-4"> PhD Students </h1>
+  {{ partial "people-list.html" . }}
+  <hr>
+{{end}}
+{{ end }}
+
+{{ with .Site.GetPage "/people/Masters" }} 
+{{ if gt (len .Pages) 0 }}
+  <h1 class="text-4xl pb-4"> Masters Students </h1>
+  {{ partial "people-list.html" . }}
+  <hr>
+{{end}}
+{{ end}}
+
+{{ with .Site.GetPage "/people/Undergraduate" }}
+{{ if gt (len .Pages) 0 }}
+  <h1 class="text-4xl pb-4"> Undergraduate Students </h1>
+  {{ partial "people-list.html" . }}
+  <hr>
+{{end}}
+{{ end}}
+
+{{ with .Site.GetPage "/people/Alumni" }}
+{{ if gt (len .Pages) 0 }}
+  <h1 class="text-4xl pb-4"> Alumni</h1>
+  {{ partial "people-list.html" . }}
+{{end}}
+{{ end}}
+
+
+
+{{ end }}

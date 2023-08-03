@@ -1,0 +1,60 @@
+{{ $page_permalink := .RelPermalink }}
+{{ range .Pages }}
+<div class="grid grid-cols-6 gap-2 pb-4">
+  <div class="order-1 col-start-1 col-end-7 md:col-end-3 bg-rpi-dark-blue-25  rounded-full text-2xl text-center dark:text-black">
+    {{ .Title }}
+  </div>
+  <div class="order-3 md:order-2 md:col-start-3 col-start-1 col-end-7 lg:col-end-6 bg-rpi-dark-red-50 rounded-full text-2xl px-4 dark:text-black">
+    Interests
+  </div>
+  <div class="order-2 md:order-3 col-start-1 col-end-7 md:col-end-3 bg-rpi-dark-blue-25 rounded-lg shadow-lg bg-opacity-50">
+    <div class="p-4">
+    <img class="rounded-lg object-scale-down mx-auto" width=200 src="{{ $page_permalink }}{{.Params.photo}}" alt="{{ .Title }} Portrait">
+    </div>
+    {{if .Params.jobtitle }}
+    <div class="text-center text-lg pb-4 bg-rpi-dark-blue-25 rounded-b-lg">
+      {{.Params.jobtitle}}
+    </div>
+    {{end}}
+  </div>
+  <div class="order-4 col-start-1 md:col-start-3 col-end-7 bg-rpi-dark-red-50 shadow-lg rounded-lg lg:col-end-6 bg-opacity-50">
+    <div class="flex flex-col justify-between h-full">
+      <article class="p-6"> {{ .Content }} </article>
+      <div class="flex space-x-4 py-2 px-4 items-center justify-center">
+      <!-- email, github, google scholar, orcid -->
+      {{ if isset .Params "email" }}
+        <div>
+          <a href="mailto:{{.Params.email}}">
+          <svg class="w-8 hover:shadow-sm hover:scale-110" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" id="email"><path fill="#222" d="M53.42 53.32H10.58a8.51 8.51 0 0 1-8.5-8.5V19.18a8.51 8.51 0 0 1 8.5-8.5h42.84a8.51 8.51 0 0 1 8.5 8.5v25.64a8.51 8.51 0 0 1-8.5 8.5ZM10.58 13.68a5.5 5.5 0 0 0-5.5 5.5v25.64a5.5 5.5 0 0 0 5.5 5.5h42.84a5.5 5.5 0 0 0 5.5-5.5V19.18a5.5 5.5 0 0 0-5.5-5.5Z"></path><path fill="#222" d="M32 38.08a8.51 8.51 0 0 1-5.13-1.71L3.52 18.71a1.5 1.5 0 1 1 1.81-2.39L28.68 34a5.55 5.55 0 0 0 6.64 0l23.35-17.68a1.5 1.5 0 1 1 1.81 2.39L37.13 36.37A8.51 8.51 0 0 1 32 38.08Z"></path><path fill="#222" d="M4.17 49.14a1.5 1.5 0 0 1-1-2.62l18.4-16.41a1.5 1.5 0 0 1 2 2.24L5.17 48.76a1.46 1.46 0 0 1-1 .38zm55.66 0a1.46 1.46 0 0 1-1-.38l-18.4-16.41a1.5 1.5 0 1 1 2-2.24l18.39 16.41a1.5 1.5 0 0 1-1 2.62z"></path></svg>
+          </a>
+        </div>
+      {{end}}
+      {{ if isset .Params "github" }}
+        <div>
+          <a href="http://www.github.com/{{.Params.github}}">
+          <svg class="w-8 h-6 hover:shadow-sm hover:scale-110" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="#24292f"/></svg>
+          </a>
+        </div>
+      {{end}}
+      {{ if isset .Params "scholar" }}
+        <div>
+          <a href="https://scholar.google.com/citations?user={{.Params.scholar}}">
+          <svg class="w-8 h-6 hover:shadow-sm hover:scale-110 bg-[#4285f4] rounded-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect rx="15%" fill="#4285f4"/><path fill="#ffffff" d="M213 111l-107 94h69c5 45 41 64 78 67-7 18-4 27 7 39-43 1-103 26-103 67 4 45 63 54 92 54 38 1 81-19 90-54 4-35-10-54-31-71-23-18-28-28-21-40 15-17 35-27 39-51 2-17-2-28-6-43l45-38-1 16c-3 2-5 6-5 9v103c2 13 22 11 23 0V160c0-3-2-7-5-8v-25l16-16zm58 141c-61 10-87-87-38-99 56-11 83 86 38 99zm-5 73c60 13 61 63 10 78-44 9-82-4-81-30 0-25 35-48 71-48z"/></svg>
+          </a>
+        </div>
+      {{end}}
+      {{ if isset .Params "orcid" }}
+        <div>
+          <a href="https://orcid.org/{{.Params.orcid}}">
+          <svg class="w-8 h-6 hover:shadow-sm hover:scale-110" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;" xml:space="preserve"> <style type="text/css"> .st0{fill:#A6CE39;} .st1{fill:#FFFFFF;} </style> <path class="st0" d="M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z"/> <g> <path class="st1" d="M86.3,186.2H70.9V79.1h15.4v48.4V186.2z"/> <path class="st1" d="M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5 c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z"/> <path class="st1" d="M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1 C84.2,46.7,88.7,51.3,88.7,56.8z"/> </g> </svg>
+          </a>
+        </div>
+      {{end}}
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{{end}}
