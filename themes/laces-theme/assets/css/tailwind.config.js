@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         'rpi-red': '#d6001c',
         'rpi-dark-gray': '#54585a',
-        'rpi-ligh-tgray': '#9ea2a2',
+        'rpi-light-gray': '#9ea2a2',
         'rpi-dark-red-100': '#ab2328',
         'rpi-dark-red-75': '#c35442',
         'rpi-dark-red-50': '#d58570',

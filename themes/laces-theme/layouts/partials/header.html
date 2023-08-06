@@ -1,4 +1,4 @@
-<header class="mx-auto w-screen max-w-screen-2xl px-6 sm:px-7 xl:px-8 2xl:px-10 py-6">
+<header class="mx-auto w-screen max-w-screen-2xl px-6 sm:px-7 xl:px-8 2xl:px-10 py-4 bg-rpi-light-gray bg-opacity-30">
     {{/* CSS functionality for menu toggle */}}
     <style type="text/css">
         input#nav-toggle:checked~label#show-button {
@@ -15,7 +15,7 @@
     </style>
 
     <nav class="flex items-center justify-between flex-wrap">
-        <a href="{{ .Site.Home.Permalink }}" class="flex items-center text-slate-800 dark:text-slate-200 font-bold">
+        <a href="{{ .Site.Home.Permalink }}" class="flex items-center text-slate-800 dark:text-slate-200 font-bold text-2xl">
             {{ .Site.Title }}
         </a>
 

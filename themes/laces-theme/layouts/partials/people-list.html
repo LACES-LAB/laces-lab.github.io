@@ -5,22 +5,22 @@
     {{ .Title }}
   </div>
   <div class="order-3 md:order-2 md:col-start-3 col-start-1 col-end-7 lg:col-end-6 bg-rpi-dark-red-50 rounded-full text-2xl px-4 dark:text-black">
-    Interests
+    About
   </div>
-  <div class="order-2 md:order-3 col-start-1 col-end-7 md:col-end-3 bg-rpi-dark-blue-25 rounded-lg shadow-lg bg-opacity-50">
-    <div class="p-4">
+  <div class="order-2 md:order-3 col-start-1 col-end-7 md:col-end-3 ">
+    <div class="p-4 bg-rpi-dark-blue-25 rounded-t-lg shadow-lg bg-opacity-50">
     <img class="rounded-lg object-scale-down mx-auto" width=200 src="{{ $page_permalink }}{{.Params.photo}}" alt="{{ .Title }} Portrait">
     </div>
     {{if .Params.jobtitle }}
-    <div class="text-center text-lg pb-4 bg-rpi-dark-blue-25 rounded-b-lg">
+    <div class="text-center text-lg pb-4 bg-rpi-dark-blue-25 rounded-b-lg dark:text-black">
       {{.Params.jobtitle}}
     </div>
     {{end}}
   </div>
-  <div class="order-4 col-start-1 md:col-start-3 col-end-7 bg-rpi-dark-red-50 shadow-lg rounded-lg lg:col-end-6 bg-opacity-50">
+  <div class="order-4 col-start-1 md:col-start-3 col-end-7 bg-rpi-dark-red-50 shadow-lg rounded-lg lg:col-end-6 bg-opacity-50 dark:bg-opacity-100">
     <div class="flex flex-col justify-between h-full">
       <article class="p-6"> {{ .Content }} </article>
-      <div class="flex space-x-4 py-2 px-4 items-center justify-center">
+      <div class="flex space-x-4 py-2 px-4 items-center justify-center" id="contact">
       <!-- email, github, google scholar, orcid -->
       {{ if isset .Params "email" }}
         <div>
