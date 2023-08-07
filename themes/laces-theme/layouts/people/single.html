@@ -1,7 +1,5 @@
-{{ $page_permalink := .RelPermalink }}
-{{ range .Pages }}
-{{ .Scratch.Set "page_permalink" $page_permalink }}
-{{ $bla := $page_permalink}}
+{{ define "main" }}
+{{ .Scratch.Set "page_permalink"  (.File.Dir | relURL | lower ) }}
 <div class="grid grid-cols-6 gap-2 pb-4">
   {{ partial "person-photo.html" . }}
   <div
@@ -18,4 +16,5 @@
     </div>
   </div>
 </div>
-{{end}}
+
+{{ end }}
