@@ -1,8 +1,8 @@
 {{ define "main" }}
-
+<h1 class="text-6xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> The Team </h1>
 {{ with .Site.GetPage "/people/PI" }} 
 {{ if gt (len .Pages) 0 }}
-  <h1 class="text-4xl pb-4 font-bold text-black"> Principle Investigator </h1>
+  <h1 class="text-4xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> Principle Investigator </h1>
   {{ partial "people-list.html" . }}
 {{ end }}
 {{ end }}
@@ -10,7 +10,7 @@
 {{ with .Site.GetPage "/people/PhD" }} 
 {{ if gt (len .Pages) 0 }}
   <hr>
-  <h1 class="text-4xl pb-4"> PhD Students </h1>
+  <h1 class="text-4xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> PhD Students </h1>
   {{ partial "people-list.html" . }}
 {{end}}
 {{ end }}
@@ -18,7 +18,7 @@
 {{ with .Site.GetPage "/people/Masters" }} 
 {{ if gt (len .Pages) 0 }}
   <hr>
-  <h1 class="text-4xl pb-4"> Masters Students </h1>
+  <h1 class="text-4xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> Masters Students </h1>
   {{ partial "people-list.html" . }}
 {{end}}
 {{ end}}
@@ -26,7 +26,7 @@
 {{ with .Site.GetPage "/people/Undergraduate" }}
 {{ if gt (len .Pages) 0 }}
   <hr>
-  <h1 class="text-4xl pb-4"> Undergraduate Students </h1>
+  <h1 class="text-4xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> Undergraduate Students </h1>
   {{ partial "people-list.html" . }}
 {{end}}
 {{ end}}
@@ -34,7 +34,15 @@
 {{ with .Site.GetPage "/people/Alumni" }}
 {{ if gt (len .Pages) 0 }}
   <hr>
-  <h1 class="text-4xl pb-4"> Alumni</h1>
+  <h1 class="text-4xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> Alumni</h1>
+  {{ partial "people-list.html" . }}
+{{end}}
+{{ end}}
+
+{{ with .Site.GetPage "/people/Affiliated" }}
+{{ if gt (len .Pages) 0 }}
+  <hr>
+  <h1 class="text-4xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center">Affiliated</h1>
   {{ partial "people-list.html" . }}
 {{end}}
 {{ end}}

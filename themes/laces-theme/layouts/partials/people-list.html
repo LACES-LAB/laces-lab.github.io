@@ -1,18 +1,36 @@
 {{ $page_permalink := .RelPermalink }}
-{{ range .Pages }}
-{{ .Scratch.Set "page_permalink" $page_permalink }}
-{{ $bla := $page_permalink}}
-<div class="grid grid-cols-6 gap-2 pb-4">
-  {{ partial "person-photo.html" . }}
-  <div
-    class="order-3 md:order-2 md:col-start-3 col-start-1 col-end-7 lg:col-end-6 bg-rpi-dark-red-50 rounded-full text-2xl px-4 dark:text-black">
-    About
-  </div>
-  <div
-    class="order-4 col-start-1 md:col-start-3 col-end-7 bg-rpi-dark-red-50 shadow-lg rounded-lg lg:col-end-6 bg-opacity-50 dark:bg-opacity-100">
-    <div class="flex flex-col justify-between h-full">
-      <article class="p-6"> {{ .Content }} </article>
+{{$ncols := cond (gt (len .Pages) 1) "md:grid-cols-6 md:place-items-stretch" "md-grid-cols-1"}}
+<div >
+<div class="flex flex-wrap flex-row justify-around gap-2 pb-4">
+  {{ range .Pages }}
+  {{ .Scratch.Set "page_permalink" $page_permalink }}
+  <div class="shadow-lg max-w-sm">
+    <div class="bg-rpi-dark-blue-25  rounded-t-lg text-2xl text-center dark:text-black">
+      <a href="{{ .Permalink }}" class="hover:text-rpi-dark-red-100">
+        {{ .Title }}
+      </a>
     </div>
+    <div>
+      <div class="p-4 bg-rpi-dark-blue-25 bg-opacity-50">
+        <img class="rounded-lg object-scale-down mx-auto" width=200
+          src='{{ .Scratch.Get "page_permalink" }}{{.Params.photo}}' alt="{{ .Title }} Portrait">
+        <div class="flex space-x-4 pt-4 px-4 items-center justify-center" id="contact">
+          {{ partial "contact-icons.html" . }}
+        </div>
+      </div>
+      <div class="text-center text-lg py-2 bg-rpi-dark-blue-25 rounded-b-lg dark:text-black">
+      {{if .Params.jobtitle }}
+        {{.Params.jobtitle}}
+      {{else}}
+      <br>
+      {{end}}
+      </div>
+
+    </div>
+
   </div>
+
+
+  {{end}}
 </div>
-{{end}}
+</div>
