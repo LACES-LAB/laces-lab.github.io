@@ -1,7 +1,7 @@
 ---
 title: Parallel Coupler for Multimodel Simulations (PCMS)
-graphicalabstract: machine-learn.jpg
+graphicalabstract: NishanParvez_portrait.jpeg
+abstract: 'This is the short description of the PCMS project'
 ---
-Should have a image summary then short description
 
-this is an exceptionally fun project...
+This is text that describes all the exciting things that we are doing with PCMS!
