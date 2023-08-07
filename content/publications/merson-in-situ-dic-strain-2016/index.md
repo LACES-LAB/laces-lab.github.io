@@ -13,7 +13,6 @@ publication_types:
 - '6'
 abstract: ''
 featured: false
-publication: '*Residual Stress, Thermomechanics & Infrared Imaging, Hybrid Techniques
-  and Inverse Problems, Volume 9*'
+publication: 'Residual Stress, Thermomechanics & Infrared Imaging, Hybrid Techniques
+  and Inverse Problems, Volume 9'
 ---
-

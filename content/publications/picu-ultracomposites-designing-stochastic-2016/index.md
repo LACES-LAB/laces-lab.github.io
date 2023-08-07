@@ -12,6 +12,6 @@ publication_types:
 - '2'
 abstract: ''
 featured: false
-publication: '*Romanian Journal of Technical Sciences Applied Mechanics*'
+publication: 'Romanian Journal of Technical Sciences Applied Mechanics'
 ---
 

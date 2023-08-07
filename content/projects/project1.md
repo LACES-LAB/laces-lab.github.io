@@ -1,5 +1,6 @@
 ---
-title: project 1
+title: Fusion Coupling
+graphicalabstract: machine-learn.jpg
 ---
 Should have a image summary then short description
 

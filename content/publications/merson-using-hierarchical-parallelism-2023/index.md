@@ -11,7 +11,7 @@ publication_types:
 - '0'
 abstract: ''
 featured: false
-publication: '*arXiv*'
+publication: 'arXiv'
 tags:
 - Computer Science - Distributed
 - Parallel

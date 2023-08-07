@@ -3,192 +3,186 @@
 {{$years := slice }}
 {{$all_pub_types := slice }}
 {{range .Pages }}
-  {{$years = $years | append .Date.Year}}
-  {{ $publication_type := index .Params.publication_types 0 }}
-  {{$all_pub_types = $all_pub_types | append $publication_type }}
+{{$years = $years | append .Date.Year}}
+{{ $publication_type := index .Params.publication_types 0 }}
+{{$all_pub_types = $all_pub_types | append $publication_type }}
 {{ end }}
 {{ $all_pub_types = $all_pub_types | uniq }}
 
-<div class="prose">
-  <h1>Publications</h1>
-</div>
-<div class="flex justify-begin">
-  <div class="inline-block relative w-32">
-    <select onchange="hideArticles()" id="article-year-select" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-      <option>Year</option>
-      {{ range $years | uniq  }}
-      <option>{{.}}</option>
-      {{ end }}
-    </select>
+<div class="mx-auto max-w-2xl">
+  <div class="prose pb-4">
+    <h1>Publications</h1>
   </div>
-  <div class="inline-block relative w-64">
-    <select onchange="hideArticles()" id="article-type-select" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-      <option>Type</option>
-<!-- 
-# Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
-# 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
-# 7 = Thesis; 8 = Patent
--->
-      {{ range $pub_type := $all_pub_types }}
-      {{if eq $pub_type "0" }}
-      <option value="0">Uncategorized</option>
-      {{ else if eq $pub_type "1" }}
-      <option value="1">Conference Paper</option>
-      {{ else if eq $pub_type "2" }}
-      <option value="2">Journal Article</option>
-      {{ else if eq $pub_type "3" }}
-      <option value="3">Preprint</option>
-      {{ else if eq $pub_type "4" }}
-      <option value="4">Report</option>
-      {{ else if eq $pub_type "5" }}
-      <option value="5">Book</option>
-      {{ else if eq $pub_type "6" }}
-      <option value="6">Book Chapter</option>
-      {{ else if eq $pub_type "7" }}
-      <option value="7">Thesis</option>
-      {{ else if eq $pub_type "8" }}
-      <option value="8">Patent</option>
-      {{ end }}
-      {{end }}
-    </select>
-  </div>
-  <div class="inline-block relative w-full sm:w-96">
-      <input id="article-search-input" oninput="hideArticles()" placeholder="Search" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" >
-  </div>
-</div>
-<!--
-<form>
-  <input list="mylist" placeholder="Publication Type" autocomplete="off"> 
-  <input list="mylist2" placeholder="Publication Year" autocomplete="off"> 
-  <input placeholder="Search" autocomplete="on">
-  <datalist id="mylist">
-    <option value="bla">
-    <option value="bla2">
-  </datalist>
-  <datalist id="mylist2">
-    <option value="2011">
-    <option value="2012">
-  </datalist>
-</form>
-<div>
--->
-  <!--
-  <form>
-    <div class="flex">
-        <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label>
-        <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-  </svg></button>
-        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-            <li>
-                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mockups</button>
-            </li>
-            <li>
-                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Templates</button>
-            </li>
-            <li>
-                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Design</button>
-            </li>
-            <li>
-                <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logos</button>
-            </li>
-            </ul>
-        </div>
-        <div class="relative w-full">
-            <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates..." required>
-            <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-                <span class="sr-only">Search</span>
-            </button>
-        </div>
+  <div class="flex justify-begin">
+    <div class="inline-block relative w-32">
+      <select onchange="hideArticles()" id="article-year-select"
+        class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+        <option>Year</option>
+        {{ range $years | uniq }}
+        <option>{{.}}</option>
+        {{ end }}
+      </select>
     </div>
-</form>
--->
+    <div class="inline-block relative w-64">
+      <select onchange="hideArticles()" id="article-type-select"
+        class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+        <option>Type</option>
+        {{ range $pub_type := $all_pub_types }}
+        {{if eq $pub_type "0" }}
+        <option value="0">Uncategorized</option>
+        {{ else if eq $pub_type "1" }}
+        <option value="1">Conference Paper</option>
+        {{ else if eq $pub_type "2" }}
+        <option value="2">Journal Article</option>
+        {{ else if eq $pub_type "3" }}
+        <option value="3">Preprint</option>
+        {{ else if eq $pub_type "4" }}
+        <option value="4">Report</option>
+        {{ else if eq $pub_type "5" }}
+        <option value="5">Book</option>
+        {{ else if eq $pub_type "6" }}
+        <option value="6">Book Chapter</option>
+        {{ else if eq $pub_type "7" }}
+        <option value="7">Thesis</option>
+        {{ else if eq $pub_type "8" }}
+        <option value="8">Patent</option>
+        {{ end }}
+        {{end }}
+      </select>
+    </div>
+    <div class="inline-block relative w-full sm:w-96">
+      <input id="article-search-input" oninput="hideArticles()" placeholder="Search"
+        class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+  </div>
+<div id="articles" class="text-sm sm:text-lg">
+  {{ $num_publications := len .Pages }}
+  {{ range $index,$page := .Pages }}
+  {{ $publication_type := index $page.Params.publication_types 0 }}
+  <div data-year="{{.Date.Year}}" data-type="{{$publication_type}}" class="py-2 pl-7 -indent-7  pr-4 sm:pl-8 sm:-indent-8 text-justify">
+    <div class="inline">[{{ sub $num_publications $index }}]</div>
+    <div class="inline">
+      {{ range $j,$author := $page.Params.authors}}
+      {{$author_is_me := strings.Contains (lower $author) "merson"}}
+      {{ $bold_string := cond $author_is_me "font-bold" ""}}
+      <div class="inline {{ $bold_string }}">
+        {{ $author -}}
+        {{if ne (add $j 1) (len $page.Params.authors) -}}
+        ,
+        {{ end }}
+      </div>
+      {{end}}
+    </div>
+    <div class="inline">
+      ({{ $page.Date.Year }}).
+    </div>
+    <div class="inline">
+      "{{ $page.Title }}".
+    </div>
+    <div class="inline italic">
+      {{ $page.Params.publication }}.
+    </div>
+    {{ if or $page.Content $page.Params.links }}
+    <br>
+    {{end }}
+    <div class="inline">
+      {{if $page.Content }}
+      <button
+        class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs"
+        onclick="toggleAbstract('{{ $index }}')">
+        Abstract
+      </button>
+      {{ end }}
+      {{range $link := $page.Params.links }}
+      <a href="{{$link.url}}">
+        <button
+          class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs">
+          {{ $link.name }}
+        </button>
+      </a>
+      {{ end }}
+    </div>
+    <div id="abstract-text-{{$index}}" class="hidden">
+      {{$page.Content}}
+    </div>
+  </div>
+  {{ end }}
 </div>
-<div id="articles">
-
-<!-- 
-# Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
-# 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
-# 7 = Thesis; 8 = Patent
--->
-{{ range .Pages }}
-{{ $publication_type := index .Params.publication_types 0 }}
-<article data-year="{{.Date.Year}}" data-type="{{$publication_type}}">
-  {{ .Title }} {{ .Date.Year }} {{$publication_type}}
-</article>
-{{ end }}
 </div>
-
 <!-- Select box for year dropdown -->
 <script>
-// function to check if should hide or show article
-function shouldHideArticleYear(article, yearOption) {
-  if(yearOption.index == 0) {
-    return false;
-  }
-  else if(yearOption.text == article.getAttribute("data-year")) {
-    return false;
-  }
-  return true;
-}
-function shouldHideArticleType(article, typeOption) {
-  if(typeOption.index == 0) {
-    return false;
-  }
-  else if(typeOption.value == article.getAttribute("data-type")) {
-    return false;
-  }
-  return true;
-}
-function shouldHideArticleSearch(article, searchString) {
-  if(searchString.length < 1) {
-    return false;
-  }
-  let title = article.textContent.trim().toLowerCase();
-  return !title.includes(searchString);
-}
-function shouldHideArticle(article, yearOption, typeOption, searchString) {
-  if(shouldHideArticleYear(article,yearOption)) {
+  // function to check if should hide or show article
+  function shouldHideArticleYear(article, yearOption) {
+    if (yearOption.index == 0) {
+      return false;
+    }
+    else if (yearOption.text == article.getAttribute("data-year")) {
+      return false;
+    }
     return true;
   }
-  if(shouldHideArticleType(article,typeOption)) {
+  function shouldHideArticleType(article, typeOption) {
+    if (typeOption.index == 0) {
+      return false;
+    }
+    else if (typeOption.value == article.getAttribute("data-type")) {
+      return false;
+    }
     return true;
   }
-  if(shouldHideArticleSearch(article,searchString)) {
-    return true;
+  function shouldHideArticleSearch(article, searchString) {
+    if (searchString.length < 1) {
+      return false;
+    }
+    let title = article.textContent.trim().toLowerCase();
+    return !title.includes(searchString);
   }
-  return false;
-}
-function hideArticles () {
-  let yearDropdown = document.getElementById("article-year-select");
-  let typeDropdown = document.getElementById("article-type-select");
-  let searchBox = document.getElementById("article-search-input");
-  let articles = document.getElementById("articles").children;
-  console.log(searchBox);
-  let yearOption = yearDropdown.options[yearDropdown.selectedIndex];
-  let typeOption = typeDropdown.options[typeDropdown.selectedIndex];
-  let searchString = searchBox.value.trim().toLowerCase();
-  console.log("SearchString", searchString);
-  // show all articles
-  for(let i=0; i < articles.length; i++) {
-    let article = articles[i];
-    //// also need to check if the current article type is correct ...
-    if(shouldHideArticle(article, yearOption, typeOption, searchString)) {
-      if(!article.classList.contains("hidden")) {
-        article.classList.add("hidden");
+  function shouldHideArticle(article, yearOption, typeOption, searchString) {
+    if (shouldHideArticleYear(article, yearOption)) {
+      return true;
+    }
+    if (shouldHideArticleType(article, typeOption)) {
+      return true;
+    }
+    if (shouldHideArticleSearch(article, searchString)) {
+      return true;
+    }
+    return false;
+  }
+  function hideArticles() {
+    let yearDropdown = document.getElementById("article-year-select");
+    let typeDropdown = document.getElementById("article-type-select");
+    let searchBox = document.getElementById("article-search-input");
+    let articles = document.getElementById("articles").children;
+    console.log(searchBox);
+    let yearOption = yearDropdown.options[yearDropdown.selectedIndex];
+    let typeOption = typeDropdown.options[typeDropdown.selectedIndex];
+    let searchString = searchBox.value.trim().toLowerCase();
+    console.log("SearchString", searchString);
+    // show all articles
+    for (let i = 0; i < articles.length; i++) {
+      let article = articles[i];
+      //// also need to check if the current article type is correct ...
+      if (shouldHideArticle(article, yearOption, typeOption, searchString)) {
+        if (!article.classList.contains("hidden")) {
+          article.classList.add("hidden");
+        }
+      }
+      else {
+        if (article.classList.contains("hidden")) {
+          article.classList.remove("hidden");
+        }
       }
     }
-    else {
-      if(article.classList.contains("hidden")) {
-        article.classList.remove("hidden");
-      }
+  }
+  function toggleAbstract(param1) {
+    console.log(param1);
+    var moreText = document.getElementById("abstract-text-" + param1);
+    if (moreText.classList.contains("hidden")) {
+      moreText.classList.remove("hidden");
+    } else {
+      moreText.classList.add("hidden");
     }
   }
-}
-
 </script>
 {{ end }}

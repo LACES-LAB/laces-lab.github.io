@@ -10,7 +10,7 @@ publication_types:
 - '2'
 abstract: ''
 featured: false
-publication: '*The Journal of Open Source Software*'
+publication: 'The Journal of Open Source Software'
 doi: 10.21105/joss.03389
 ---
 

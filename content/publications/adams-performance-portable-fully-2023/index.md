@@ -13,7 +13,7 @@ publication_types:
 - '0'
 abstract: ''
 featured: false
-publication: '*arXiv*'
+publication: 'arXiv'
 tags:
 - Physics - Plasma Physics
 doi: 10.48550/arXiv.2209.03228

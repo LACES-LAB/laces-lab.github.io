@@ -11,7 +11,7 @@ publication_types:
 - '2'
 abstract: ''
 featured: false
-publication: '*Acta Biomaterialia*'
+publication: 'Acta Biomaterialia'
 tags:
 - dissertation-nocite
 - Indentation

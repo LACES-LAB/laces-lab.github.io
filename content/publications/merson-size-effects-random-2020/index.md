@@ -11,7 +11,7 @@ publication_types:
 - '2'
 abstract: ''
 featured: false
-publication: '*International Journal of Solids and Structures*'
+publication: 'International Journal of Solids and Structures'
 doi: 10.1016/j.ijsolstr.2020.09.033
 ---
 

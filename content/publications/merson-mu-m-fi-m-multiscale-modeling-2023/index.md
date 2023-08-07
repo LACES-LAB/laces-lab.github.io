@@ -11,11 +11,12 @@ publication_types:
 - '0'
 abstract: ''
 featured: false
-publication: '*arXiv*'
+publication: 'arXiv'
 tags:
 - dissertation-nocite
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2306.09427
 ---
+This is the abstract of the paper!
 

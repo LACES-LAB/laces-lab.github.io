@@ -10,7 +10,7 @@ publication_types:
 - '2'
 abstract: ''
 featured: false
-publication: '*Journal of Applied Mechanics*'
+publication: 'Journal of Applied Mechanics'
 tags:
 - dissertation-nocite
 doi: 10.1115/1.4053329
