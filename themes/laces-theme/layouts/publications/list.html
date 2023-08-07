@@ -55,59 +55,60 @@
         class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
     </div>
   </div>
-<div id="articles" class="text-sm sm:text-lg">
-  {{ $num_publications := len .Pages }}
-  {{ range $index,$page := .Pages }}
-  {{ $publication_type := index $page.Params.publication_types 0 }}
-  <div data-year="{{.Date.Year}}" data-type="{{$publication_type}}" class="py-2 pl-7 -indent-7  pr-4 sm:pl-8 sm:-indent-8 text-justify">
-    <div class="inline">[{{ sub $num_publications $index }}]</div>
-    <div class="inline">
-      {{ range $j,$author := $page.Params.authors}}
-      {{$author_is_me := strings.Contains (lower $author) "merson"}}
-      {{ $bold_string := cond $author_is_me "font-bold" ""}}
-      <div class="inline {{ $bold_string }}">
-        {{ $author -}}
-        {{if ne (add $j 1) (len $page.Params.authors) -}}
-        ,
+  <div id="articles" class="text-sm sm:text-lg">
+    {{ $num_publications := len .Pages }}
+    {{ range $index,$page := .Pages }}
+    {{ $publication_type := index $page.Params.publication_types 0 }}
+    <div data-year="{{.Date.Year}}" data-type="{{$publication_type}}"
+      class="py-2 pl-7 -indent-7  pr-4 sm:pl-8 sm:-indent-8 text-justify">
+      <div class="inline">[{{ sub $num_publications $index }}]</div>
+      <div class="inline">
+        {{ range $j,$author := $page.Params.authors}}
+        {{$author_is_me := strings.Contains (lower $author) "merson"}}
+        {{ $bold_string := cond $author_is_me "font-bold" ""}}
+        <div class="inline {{ $bold_string }}">
+          {{ $author -}}
+          {{if ne (add $j 1) (len $page.Params.authors) -}}
+          ,
+          {{ end }}
+        </div>
+        {{end}}
+      </div>
+      <div class="inline">
+        ({{ $page.Date.Year }}).
+      </div>
+      <div class="inline">
+        "{{ $page.Title }}".
+      </div>
+      <div class="inline italic">
+        {{ $page.Params.publication }}.
+      </div>
+      {{ if or $page.Content $page.Params.links }}
+      <br>
+      {{end }}
+      <div class="inline">
+        {{if $page.Content }}
+        <button
+          class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs"
+          onclick="toggleAbstract('{{ $index }}')">
+          Abstract
+        </button>
+        {{ end }}
+        {{range $link := $page.Params.links }}
+        <a href="{{$link.url}}">
+          <button
+            class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs">
+            {{ $link.name }}
+          </button>
+        </a>
         {{ end }}
       </div>
-      {{end}}
+      <div id="abstract-text-{{$index}}" class="hidden">
+        {{$page.Content}}
+      </div>
     </div>
-    <div class="inline">
-      ({{ $page.Date.Year }}).
-    </div>
-    <div class="inline">
-      "{{ $page.Title }}".
-    </div>
-    <div class="inline italic">
-      {{ $page.Params.publication }}.
-    </div>
-    {{ if or $page.Content $page.Params.links }}
-    <br>
-    {{end }}
-    <div class="inline">
-      {{if $page.Content }}
-      <button
-        class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs"
-        onclick="toggleAbstract('{{ $index }}')">
-        Abstract
-      </button>
-      {{ end }}
-      {{range $link := $page.Params.links }}
-      <a href="{{$link.url}}">
-        <button
-          class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs">
-          {{ $link.name }}
-        </button>
-      </a>
-      {{ end }}
-    </div>
-    <div id="abstract-text-{{$index}}" class="hidden">
-      {{$page.Content}}
-    </div>
+    {{ end }}
   </div>
-  {{ end }}
-</div>
 </div>
 <!-- Select box for year dropdown -->
 <script>
