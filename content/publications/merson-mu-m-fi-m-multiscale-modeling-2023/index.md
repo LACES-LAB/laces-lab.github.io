@@ -8,7 +8,7 @@ authors:
 - Catalin Picu
 - Mark S. Shephard
 publication_types:
-- '0'
+- '3'
 abstract: ''
 featured: false
 publication: 'arXiv'
