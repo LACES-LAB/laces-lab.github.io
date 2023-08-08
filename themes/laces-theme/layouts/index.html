@@ -1,14 +1,22 @@
 {{ define "main" }}
-<article class="justify-self-center mx-auto text-center prose dark:prose-invert prose-slate lg:prose-lg">
-    <h1 class="font-serif font-extralight text-5xl welcome-headline">{{ .Title }}</h1>
+<article class="mx-auto max-w-4xl text-black ">
+  <h1 class="text-center font-serif font-extralight text-5xl welcome-headline">{{ .Title }}</h1>
+  <div class="bg-rpi-dark-blue-50 rounded-lg p-6">
     <div class="grid grid-cols-1 md:gap-4 md:grid-cols-3">
-      <div>
-        <img src="{{.Params.image}}" alt="{{.Params.imagealt}}">
+      <div class="col-span-1 mx-auto my-auto">
+        <div class="bg-rpi-dark-blue-25 rounded-lg my-2">
+          <img class="py-2 px-2" src="{{.Params.image}}" alt="{{.Params.imagealt}}">
+        </div>
       </div>
-      <div class="col-span-2">
-        {{ .Content }}
+      <div class="col-span-2 my-auto px-4">
+        {{range $index,$thrust := .Params.thrusts}}
+        <div class="flex flex-col py-2 md:flex-row">
+        <div class="flex-shrink-0 font-bold">Thrust {{ add $index 1}}:&nbsp;</div><div class="text-justify">{{$thrust}}</div>
+
+        </div> 
+        {{ end }}
       </div>
-      
     </div>
+  </div>
 </article>
 {{ end }}
