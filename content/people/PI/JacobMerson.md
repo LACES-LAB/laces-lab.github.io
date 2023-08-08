@@ -15,9 +15,9 @@ I believe that science and engineering computations using next-generation comput
 Please explore the [projects](/projects) my group is working on and feel free to [contact me](#contact).
 
 ### Academic Profile
-It turns out that I bleed red and white. I have had the privilege of spending a significant portion of my career at RPI.
-
 - B.S. Mechanical Engineering, RPI, 2015
 - Ph.D. Mechanical Engineering, RPI, 2020
-- Researcher, Los Alamos National Lab, 2014--2023
 - Assistant Professor, RPI, 2023
+
+### Professional Experience
+- Researcher, Los Alamos National Lab, 2014--2023

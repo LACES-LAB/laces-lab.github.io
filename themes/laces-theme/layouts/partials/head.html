@@ -27,4 +27,5 @@
     </script>
     <!-- stylesheet for hugo-cite bibliography -->
     <link rel="stylesheet" type="text/css" href="{{ "/hugo-cite.css" | relURL }}" />
+    {{ if .Params.mathjax }}{{ partial "mathjax-support.html" . }}{{ end }}
 </head>

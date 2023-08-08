@@ -1,4 +1,5 @@
 ---
 title: Publications
+mathjax: true
 ---
 
