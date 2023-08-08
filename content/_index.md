@@ -18,4 +18,4 @@ and fusion reactor design.
 
 **Thrust 3:** Improved methodologies for multiscale modeling fibrous materials.
 
-Looking for motivated students! [Please contact me]({{<relref "/laces-website/people/pi/jacobmerson">}}).
+Looking for motivated students! [Please contact me]({{<relref "/people/pi/jacobmerson">}}).
