@@ -1,6 +1,12 @@
 {{ $page_permalink := .RelPermalink }}
 {{$ncols := cond (gt (len .Pages) 1) "md:grid-cols-6 md:place-items-stretch" "md-grid-cols-1"}}
 <div >
+<!-- Hiring banner -->
+{{ if .Params.message}}
+<div class="prose mx-auto max-w-2xl text-black text-lg mb-6 p-4 rounded-lg bg-rpi-dark-red-75 border-black border-2">
+  {{ .Params.message | markdownify }}
+</div>
+{{ end }}
 <div class="flex flex-wrap flex-row justify-around gap-2 pb-4">
   {{ range .Pages }}
   {{ .Scratch.Set "page_permalink" $page_permalink }}
@@ -12,8 +18,10 @@
     </div>
     <div>
       <div class="p-4 bg-rpi-dark-blue-25 bg-opacity-50">
-        <img class="rounded-lg object-scale-down mx-auto" width=200
+        <a href="{{ .Permalink }}">
+        <img class="rounded-lg object-scale-down mx-auto hover:opacity-50" width=200
           src='{{ .Scratch.Get "page_permalink" }}{{.Params.photo}}' alt="{{ .Title }} Portrait">
+        </a>
         <div class="flex space-x-4 pt-4 px-4 items-center justify-center" id="contact">
           {{ partial "contact-icons.html" . }}
         </div>

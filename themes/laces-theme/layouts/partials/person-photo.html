@@ -1,8 +1,13 @@
   <div
     class="order-1 col-start-1 col-end-7 md:col-end-3 bg-rpi-dark-blue-25  rounded-full text-2xl text-center dark:text-black">
-    <a href="{{ .Permalink }}" class="hover:text-rpi-dark-red-100">
-      {{ .Title }}
-    </a>
+    {{ if .IsSection }}
+      <a href="{{ .Permali }}" class="hover:text-rpi-dark-red-100">
+        {{ .Title }}
+      </a>
+    {{else}}
+        {{ .Title }}
+    {{ end }}
+
   </div>
   <div class="order-2 md:order-3 col-start-1 col-end-7 md:col-end-3 ">
     <div class="p-4 bg-rpi-dark-blue-25 rounded-t-lg shadow-lg bg-opacity-50">
