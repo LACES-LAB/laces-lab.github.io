@@ -15,7 +15,7 @@ I believe that science and engineering computations using next-generation comput
 Please explore the [projects](/projects) my group is working on and feel free to [contact me](#contact).
 
 ### Academic Profile
-It turns out that I bleed red and white. I have had the privledge of spending a significant portion of my career at RPI.
+It turns out that I bleed red and white. I have had the privilege of spending a significant portion of my career at RPI.
 
 - B.S. Mechanical Engineering, RPI, 2015
 - Ph.D. Mechanical Engineering, RPI, 2020
