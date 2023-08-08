@@ -69,7 +69,7 @@
         <div class="inline {{ $bold_string }}">
           {{- $author -}}
           {{- if ne (add $j 1) (len $page.Params.authors) -}}
-          ,&nbsp
+          ,
           {{ end }}
         </div>
         {{end}}
@@ -78,7 +78,7 @@
         &nbsp({{- $page.Date.Year -}}).
       </div>
       <div class="inline">
-        &nbsp"{{- $page.Title -}}".
+        "{{- $page.Title -}}".
       </div>
       <div class="inline italic">
         &nbsp{{- $page.Params.publication -}}.
