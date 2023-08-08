@@ -2,6 +2,7 @@
 title: Mithun Dey
 photo: ./MithunDey.jpeg
 email: deym2@rpi.edu
+jobtitle: Ph.D. Student
 ---
 ### Background
 

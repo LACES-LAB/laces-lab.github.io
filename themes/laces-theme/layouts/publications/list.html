@@ -86,13 +86,21 @@
       {{ if or $page.Content $page.Params.links }}
       <br>
       {{end }}
-      <div class="inline">
-        {{if $page.Content }}
+      <div class="pl-7 sm:pl-8">
+        {{if $page.Params.abstract }}
         <button
           class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs"
           onclick="toggleAbstract('{{ $index }}')">
           Abstract
         </button>
+        {{ end }}
+        {{ if $page.Params.doi }} 
+          <a href="https://doi.org/{{$page.Params.doi}}">
+            <button
+              class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs">
+              DOI: {{$page.Params.doi}}
+            </button>
+          </a>
         {{ end }}
         {{range $link := $page.Params.links }}
         <a href="{{$link.url}}">
@@ -103,8 +111,8 @@
         </a>
         {{ end }}
       </div>
-      <div id="abstract-text-{{$index}}" class="hidden">
-        {{$page.Content}}
+      <div id="abstract-text-{{$index}}" class="hidden bg-rpi-dark-gray text-black indent-6 p-6 mt-4 rounded-lg bg-opacity-30 dark:text-rpi-dark-blue-25">
+        {{$page.Params.abstract | markdownify }}
       </div>
     </div>
     {{ end }}

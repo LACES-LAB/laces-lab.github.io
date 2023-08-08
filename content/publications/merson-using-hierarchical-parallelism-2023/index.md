@@ -9,7 +9,15 @@ authors:
 - Mark S. Shephard
 publication_types:
 - '1'
-abstract: ''
+abstract: >
+  This paper presents efforts to improve the hierarchical 
+  parallelism of a two scale simulation code. Two methods
+  to improve the GPU parallel performance were developed and 
+  compared. The first used the NVIDIA Multi-Process Serviceand
+  the second moved the entire sub-problem loop into a 
+  single kernel using Kokkos hierarchical parallelism and a 
+  PackedView data structure. Both approaches improved parallel 
+  performance with the second method providing the greatest improvements.
 featured: false
 publication: 'arXiv'
 tags:

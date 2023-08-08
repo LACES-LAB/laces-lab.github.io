@@ -1,7 +1,32 @@
 {{ define "main" }}
-<article
-    class="justify-self-center mx-auto px-6 mb-16 sm:px-4 md:px-0 prose dark:prose-invert prose-slate lg:prose-lg hover:prose-a:text-sky-500">
-    <h1>{{ .Title }}</h1>
-    {{ .Content }}
-</article>
+<div class="mx-auto max-w-3xl bg-rpi-dark-blue-50  rounded-lg my-6 overflow-hidden p-6 ">
+  <div>
+    <!-- grouping for figure/abstract -->
+    <!-- Abstract -->
+    <div class="bg-rpi-dark-red-50 rounded-full py-2 px-6">
+      <h1 class="text-bold text-xl text-center font-bold text-black dark:text-rpi-dark-red-50 ">
+        {{.Title}}
+      </h1>
+    </div>
+    <!-- Figure -->
+    <div>
+      <img class="mx-auto m-2 rounded-lg object-scale-down" height="200"
+        src="{{ .RelPermalink }}{{.Params.graphicalabstract}}" alt="{{ .Title }} Portrait">
+    </div>
+    <article class="text-black">
+      <h3 class="mb-0 pb-0">Abstract</h3>
+      <hr class="mb-0 pb-4 mt-0 pt-0">
+      <div class="bg-rpi-dark-gray bg-opacity-60 rounded-lg p-4">
+        {{ .Page.Params.abstract | markdownify}}
+      </div>
+      {{if .Page.Content }}
+      <div>
+        <h3 class="pb-0 mb-0">Details</h3>
+        <hr class="mb-0 pb-4 mt-0 pt-0">
+        {{ .Page.Content }}
+      </div>
+      {{end}}
+    </article>
+  </div>
+</div>
 {{ end }}

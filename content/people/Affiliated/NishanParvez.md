@@ -3,6 +3,7 @@ title: Nishan Parvez
 photo: ./NishanParvez_portrait.jpeg
 github: npdroid
 email: parvem@rpi.edu
+jobtitle: Ph.D. Student
 ---
 ### Background
 
