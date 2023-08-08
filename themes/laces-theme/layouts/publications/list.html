@@ -67,21 +67,21 @@
         {{$author_is_me := strings.Contains (lower $author) "merson"}}
         {{ $bold_string := cond $author_is_me "font-bold" ""}}
         <div class="inline {{ $bold_string }}">
-          {{ $author -}}
-          {{if ne (add $j 1) (len $page.Params.authors) -}}
-          ,
+          {{- $author -}}
+          {{- if ne (add $j 1) (len $page.Params.authors) -}}
+          ,&nbsp
           {{ end }}
         </div>
         {{end}}
       </div>
       <div class="inline">
-        ({{ $page.Date.Year }}).
+        &nbsp({{- $page.Date.Year -}}).
       </div>
       <div class="inline">
-        "{{ $page.Title }}".
+        &nbsp"{{- $page.Title -}}".
       </div>
       <div class="inline italic">
-        {{ $page.Params.publication }}.
+        &nbsp{{- $page.Params.publication -}}.
       </div>
       {{ if or $page.Content $page.Params.links }}
       <br>
