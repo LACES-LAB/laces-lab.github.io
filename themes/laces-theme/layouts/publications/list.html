@@ -59,60 +59,63 @@
     {{ $num_publications := len .Pages }}
     {{ range $index,$page := .Pages }}
     {{ $publication_type := index $page.Params.publication_types 0 }}
-    <div data-year="{{.Date.Year}}" data-type="{{$publication_type}}"
-      class="py-2 pl-7 -indent-7  pr-4 sm:pl-8 sm:-indent-8">
-      <div class="inline">[{{ sub $num_publications $index }}]</div>
-      <div class="inline">
-        {{ range $j,$author := $page.Params.authors}}
-        {{$author_is_me := strings.Contains (lower $author) "merson"}}
-        {{ $bold_string := cond $author_is_me "font-bold" ""}}
-        <div class="inline {{ $bold_string }}">
-          {{- $author -}}
-          {{- if ne (add $j 1) (len $page.Params.authors) -}}
-          ,&nbsp;
-          {{ end }}
+    <div data-year="{{.Date.Year}}" data-type="{{$publication_type}}" class="py-2 flex flex-row ">
+      <div class="mr-2">[{{ sub $num_publications $index }}]</div>
+      <!-- article info -->
+      <div>
+        <div class="inline">
+          {{ range $j,$author := $page.Params.authors}}
+          {{$author_is_me := strings.Contains (lower $author) "merson"}}
+          {{ $bold_string := cond $author_is_me "font-bold" ""}}
+          <div class="inline {{ $bold_string }}">
+            {{- $author -}}
+            {{- if ne (add $j 1) (len $page.Params.authors) -}}
+            ,&nbsp;
+            {{ end }}
+          </div>
+          {{end}}
         </div>
-        {{end}}
-      </div>
-      <div class="inline">
-        &nbsp;({{- $page.Date.Year -}}).
-      </div>
-      <div class="inline">
-        &nbsp;"{{- $page.Title -}}".
-      </div>
-      <div class="inline italic">
-        &nbsp;{{- $page.Params.publication -}}.
-      </div>
-      {{ if or $page.Content $page.Params.links }}
-      <br>
-      {{end }}
-      <div class="pl-7 sm:pl-8">
-        {{if $page.Params.abstract }}
-        <button
-          class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs"
-          onclick="toggleAbstract('{{ $index }}')">
-          Abstract
-        </button>
-        {{ end }}
-        {{ if $page.Params.doi }} 
-          <a href="https://doi.org/{{$page.Params.doi}}">
+        <div class="inline">
+          &nbsp;({{- $page.Date.Year -}}).
+        </div>
+        <div class="inline">
+          &nbsp;"{{- $page.Title -}}".
+        </div>
+        <div class="inline italic">
+          &nbsp;{{- $page.Params.publication -}}.
+        </div>
+        <div>
+          <!-- buttons -->
+          <div class="space-x-1">
+            {{if $page.Params.abstract }}
             <button
-              class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs">
-              DOI: {{$page.Params.doi}}
+              class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs mb-2 sm:mb-0"
+              onclick="toggleAbstract('{{ $index }}')">
+              Abstract
             </button>
-          </a>
-        {{ end }}
-        {{range $link := $page.Params.links }}
-        <a href="{{$link.url}}">
-          <button
-            class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs">
-            {{ $link.name }}
-          </button>
-        </a>
-        {{ end }}
-      </div>
-      <div id="abstract-text-{{$index}}" class="hidden bg-rpi-dark-gray text-black indent-6 p-6 mt-4 rounded-lg bg-opacity-30 dark:text-rpi-dark-blue-25">
-        {{$page.Params.abstract | markdownify }}
+            {{ end }}
+            {{ if $page.Params.doi }}
+            <a href="https://doi.org/{{$page.Params.doi}}">
+              <button
+                class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs mb-2 sm:mb-0">
+                DOI: {{$page.Params.doi}}
+              </button>
+            </a>
+            {{ end }}
+            {{range $link := $page.Params.links }}
+            <a href="{{$link.url}}">
+              <button
+                class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs mb-2 sm:mb-0">
+                {{ $link.name }}
+              </button>
+            </a>
+            {{ end }}
+          </div>
+          <div id="abstract-text-{{$index}}"
+            class="hidden bg-rpi-dark-gray text-black indent-6 p-6 mt-4 rounded-lg bg-opacity-30 dark:text-rpi-dark-blue-25">
+            {{$page.Params.abstract | markdownify }}
+          </div>
+        </div>
       </div>
     </div>
     {{ end }}
