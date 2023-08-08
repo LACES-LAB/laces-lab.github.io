@@ -8,7 +8,7 @@ imagealt: overview of lab activities
 
 <!-- ![lab overview](overview_figure_v4_funnel_only.svg) -->
 
-My lab works with 3 main areas. We are excited to ... 
+My lab works with 3 main areas:
 
 **Thrust 1:** Development of advanced simulation technologies and large-scale models for
 supercomputers and emerging hardware to enable new science in biomechanics
@@ -18,5 +18,4 @@ and fusion reactor design.
 
 **Thrust 3:** Improved methodologies for multiscale modeling fibrous materials.
 
-
-Looking for motivated students! Please contact me.
+Looking for motivated students! [Please contact me]({{<relref "/laces-website/people/pi/jacobmerson">}}).
