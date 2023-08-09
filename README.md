@@ -18,3 +18,15 @@ Publication types:
 6 = Book section;
 7 = Thesis;
 8 = Patent
+
+## Checking spelling
+
+Tips [here](https://www.manuel-strehl.de/check_markdown_spelling_with_aspell)
+
+```bash
+for file in *.md
+do
+    aspell check --mode=markdown --lang=en "$file"
+done
+
+```
