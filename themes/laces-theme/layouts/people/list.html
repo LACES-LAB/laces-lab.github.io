@@ -2,7 +2,7 @@
 <h1 class="text-6xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> The Team </h1>
 {{ with .Site.GetPage "/people/PI" }} 
 {{ if or (gt (len .Pages) 0) .Params.message }}
-  <h1 class="text-4xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> Principle Investigator </h1>
+  <h1 class="text-4xl pb-4 font-bold text-black dark:text-rpi-dark-red-50 text-center"> Principal Investigator </h1>
   {{ partial "people-list.html" . }}
 {{ end }}
 {{ end }}
