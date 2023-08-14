@@ -2,6 +2,8 @@ baseURL = 'laces.github.io'
 languageCode = 'en-us'
 title = 'LACES'
 theme = ["laces-theme", "hugo-cite"]
+googleAnalytics = 'G-VZ0W0G2MRZ'
+
 [author]
 name='Jacob Merson'
 
