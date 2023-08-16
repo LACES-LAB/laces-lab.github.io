@@ -1,0 +1,27 @@
+  <div class="shadow-lg max-w-sm">
+    <div class="bg-rpi-dark-blue-25  rounded-t-lg text-2xl text-center dark:text-black">
+      <a href="{{ .Permalink }}" class="hover:text-rpi-dark-red-100">
+        {{ .Title }}
+      </a>
+    </div>
+    <div>
+      <div class="p-4 bg-rpi-dark-blue-25 bg-opacity-50">
+        <a href="{{ .Permalink }}">
+        <img class="rounded-lg object-scale-down mx-auto hover:opacity-50" width=200
+          src='{{ .Scratch.Get "page_permalink" }}{{.Params.photo}}' alt="{{ .Title }} Portrait">
+        </a>
+        <div class="flex space-x-4 pt-4 px-4 items-center justify-center" id="contact">
+          {{ partial "contact-icons.html" . }}
+        </div>
+      </div>
+      <div class="text-center text-lg py-2 bg-rpi-dark-blue-25 rounded-b-lg dark:text-black">
+      {{if .Params.jobtitle }}
+        {{.Params.jobtitle}}
+      {{else}}
+      <br>
+      {{end}}
+      </div>
+
+    </div>
+
+  </div>
