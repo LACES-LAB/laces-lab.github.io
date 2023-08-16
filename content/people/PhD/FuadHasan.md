@@ -1,5 +1,5 @@
 ---
-title: Md Fuad Hasan
+title: Fuad Hasan
 photo: ./FuadHasan.jpg
 email: hasanm4@rpi.edu
 github: fuad-hh
