@@ -1,15 +1,88 @@
 ---
-author: Jacob Merson
-title: Lab for Accelerated Computing In Engineering and Science
-date: 2023-06-20
-image: overview_figure_v4_funnel_only.svg
-imagealt: overview of lab activities
-thrusts:
-- Development of advanced simulation technologies and large-scale models for supercomputers and emerging hardware to enable new science in biomechanics and fusion reactor design.
-- Abstractions and algorithms for coupling of multiscale and multiphysics codes.
-- Improved methodologies for multiscale modeling fibrous materials.
+# Leave the homepage title empty to use the site title
+title:
+date: 2022-10-24
+type: landing
+
+sections:
+  - block: hero
+    content:
+      title: |
+        Lab for Accelerated Computing in Engineering and Science
+      text: |
+        <br>
+        Empowering Innovation Through Multiscale Modeling and Advanced Simulation Technologies on Leadership-Class Supercomputers and Emerging Hardware
+  
+  - block: collection
+    content:
+      title: Projects
+      text:
+      filters:
+        folders:
+          - projects
+    design:
+      columns: '1'
+      view: showcase
+      flip_alt_rows: true
+
+  - block: collection
+    content:
+      title: Latest News
+      subtitle:
+      text:
+      count: 5
+      filters:
+        author: ''
+        category: ''
+        exclude_featured: false
+        publication_type: ''
+        tag: ''
+      offset: 0
+      order: desc
+      page_type: post
+    design:
+      view: card
+      columns: '1'
+  
+#  - block: markdown
+#    content:
+#      title:
+#      subtitle: ''
+#      text:
+#    design:
+#      columns: '1'
+#      background:
+#        image: 
+#          filename: coders.jpg
+#          filters:
+#            brightness: 1
+#          parallax: false
+#          position: center
+#          size: cover
+#          text_color_light: true
+#      spacing:
+#        padding: ['20px', '0', '20px', '0']
+#      css_class: fullscreen
+
+  - block: collection
+    content:
+      title: Latest Articles
+      text: ""
+      count: 5
+      filters:
+        folders:
+          - publication
+        publication_type: 'article-journal'
+    design:
+      view: citation
+      columns: '1'
+
+  - block: markdown
+    content:
+      title:
+      subtitle:
+      text: |
+        {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
+    design:
+      columns: '1'
 ---
-
-<!-- ![lab overview](overview_figure_v4_funnel_only.svg) -->
-
-Looking for motivated students! [Please contact me]({{<relref "/people/pi/jacobmerson">}}).

@@ -1,7 +1,12 @@
 ---
 title: Machine Learning Constitutive Response of Multiscale Fibrous Materials
-graphicalabstract: HPC_Biomechanics.png
-abstract: >
+image:
+  placement: 1
+  filename: HPC_Biomechanics.png
+  focal_point: 'Center'
+  preview_only: false
+weight: 3
+---
   Hi-fidelity multiscale simulations using frameworks such as [MuMFiM]({{< relref "/projects/mumfim/index.md" >}})
   are necessary to develop an understanding of fibrous materials on an
   engineering or biological scale. However, they require significant computational
@@ -17,6 +22,3 @@ abstract: >
   continuing to incorporate the complex fiber network physics into these machine
   learned models, more of the biomechanics community can access the benefits of
   high-fidelity multiscale simulations.
-
-weight: 3
----

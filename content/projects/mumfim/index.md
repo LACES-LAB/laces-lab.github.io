@@ -1,9 +1,16 @@
 ---
 title: Multiscale Modeling of Fibrous Materials (MuMFiM)
 github: SCOREC/mumfim
-graphicalabstract: mumfim-overview.png
-abstract: >
-  Fibrous materials are common in engineering and biology with applications 
+image:
+  placement: 1
+  filename: mumfim-overview.png
+  focal_point: 'Center'
+  preview_only: false
+  alt_text: A diagram showing the structure of PCMS. It uses an intermediate representation of fields to improve scalability of new couplings.
+
+weight: 2
+---
+Fibrous materials are common in engineering and biology with applications 
   ranging from geotextiles to the extracellular matrix, collagen and actin gels.
   Modeling these materials on the engineering or biological scale is difficult
   because they move nonaffinely, are nonlocal, and heterogeneous. On one end of 
@@ -14,13 +21,10 @@ abstract: >
   complexity which is important for understanding disease progression.
  
 
-  MuMFiM is a multiscale framework for high performance simulations of fibrous 
+ MuMFiM is a multiscale framework for high performance simulations of fibrous 
   materials. It is able to fill the gap between computational cost and capturing
   fiber micromechanics. To do this, it uses a FE2 finite element method and 
   specialized data-parallel solvers that are optimized to run on GPUs
   combined with MPI distributed parallel solvers. Together, this enables
   computations on models that are directly constructed from various imaging
   modalities.
-
-weight: 2
----
