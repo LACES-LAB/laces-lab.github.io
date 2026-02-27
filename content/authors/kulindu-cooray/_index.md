@@ -27,15 +27,15 @@ interests:
 
 education:
   courses:
-    - course: BS in Computer Science (anticipated)
+    - course: BS in Computer Science
       institution: Rensselaer Polytechnic Institute
       year: 2025
 
 # Social/Academic Networking
-social:
-  - icon: envelope
-    icon_pack: fas
-    link: 'mailto:coorak@rpi.edu'
+#social:
+#  - icon: envelope
+#    icon_pack: fas
+#    link: 'mailto:coorak@rpi.edu'
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true

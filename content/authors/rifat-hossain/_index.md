@@ -57,7 +57,7 @@ highlight_name: true
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
- - "PhD Students"
+ - "Alumni"
 ---
 
 Leveraging next-generation computers and accelerators, I aim to develop technologies that contribute to a more just and sustainable future through advancements in healthcare, as well as engineering tool development.
