@@ -10,15 +10,15 @@ last_name: Hasan
 superuser: false
 
 # Role/position
-role: Graduate Research Assistant
+role:  Mechanical Engineering Ph.D. Student
 
 # Organizations/Affiliations
 organizations:
   - name: Rensselaer Polytechnic Institute
-    url: 'https://fuad-hh.github.io/' # I am not sure if the URL should go here
+    url: 'https://hasanfuad.com' # I am not sure if the URL should go here
 
 # Short bio (displayed in user profile at end of posts)
-bio: works on accelerating Monte Carlo particle transport simulations for plasma and fusion reactor applications.
+bio: Works on accelerated Monte Carlo particle transport simulations for plasma and fusion reactor applications.
 
 interests:
   - High Performance computing
@@ -36,15 +36,18 @@ education:
 
 # Social/Academic Networking
 social:
-  - icon: envelope
+  - icon: globe
     icon_pack: fas
-    link: 'mailto:hasanm4@rpi.edu'
+    link: 'https://hasanfuad.com'
   - icon: github
     icon_pack: fab
     link: https://github.com/fuad-hh
-  - icon: orcid
-    icon_pack: fab
-    link: https://orcid.org/0009-0001-7043-6657
+  - icon: google-scholar
+    icon_pack: ai
+    link: https://scholar.google.com/citations?user=VPZijwUAAAAJ&hl=en&inst=5831747260623323207
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:hasanm4@rpi.edu'
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
