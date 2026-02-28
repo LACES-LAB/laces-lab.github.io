@@ -1,0 +1,24 @@
+# Author name aliases for bib2hugo.py
+#
+# Maps a name as it appears in the .bib file (after "Last, First" -> "First Last"
+# conversion) to the canonical name used in content/authors/*/  _index.md.
+#
+# Add an entry here whenever the bib uses a name variant that cannot be
+# auto-matched by last name + first name comparison.
+#
+# Format:
+#   "Name in bib file": "Canonical Hugo author title"
+
+# Jacob Merson variants
+"Jacob S. Merson": "Jacob Merson"
+"Merson, J.": "Jacob Merson"
+"Merson, J. S.": "Jacob Merson"
+"J. Merson": "Jacob Merson"
+
+# Fuad Hasan — bib uses short form, profile first_name is "Md Fuad Hasibul"
+"Fuad Hasan": "Fuad Hasan"
+"Md Fuad Hasibul Hasan": "Fuad Hasan"
+
+# Zachary Knowlan
+"Zachary Knowlan": "Zachary Knowlan"
+"Z. Knowlan": "Zachary Knowlan"
