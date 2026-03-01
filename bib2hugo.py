@@ -260,6 +260,41 @@ def venue_from_entry(entry: dict) -> str:
     return clean_latex(venue)
 
 
+def should_include_talk(entry: dict) -> bool:
+    """Return True if this entry should generate an event/talk page."""
+    explicit = entry.get('website-skip', '').strip().lower()
+    if explicit == 'true':
+        return False
+    if explicit == 'false':
+        return True
+    if entry.get('ENTRYTYPE', '').lower() != 'misc':
+        return False
+    kws = get_keywords(entry)
+    if 'peerreview' in kws:   # already handled as a publication
+        return False
+    if not kws:               # no keywords → unclassified, skip
+        return False
+    if 'invited' in kws:
+        return True
+    # Contributed conference talks and posters (require 'conference' to exclude all-hands)
+    if 'conference' in kws and 'contributed' in kws:
+        return True
+    return False
+
+
+def talk_tags(entry: dict) -> list:
+    """Return display tags for a talk entry."""
+    kws = get_keywords(entry)
+    tags = []
+    if 'invited' in kws:
+        tags.append('invited')
+    elif 'poster' in kws:
+        tags.append('poster')
+    else:
+        tags.append('contributed')
+    return tags
+
+
 def should_include(entry: dict) -> bool:
     explicit = entry.get('website-skip', '').strip().lower()
     if explicit == 'true':
@@ -313,6 +348,24 @@ def validate_entry(entry: dict, profiles: list, aliases: dict) -> list:
             ))
         # 'exact', 'alias', 'unknown' → no warning for unknown (external collaborators)
 
+    return warnings
+
+
+def validate_talk(entry: dict, profiles: list, aliases: dict) -> list:
+    """Return warnings for a talk entry (author resolution only; no abstract check)."""
+    warnings = []
+    eid = entry.get('ID', '?')
+    for name in parse_authors(entry.get('author', '')):
+        _, profile, method = resolve_author(name, profiles, aliases)
+        if method == 'fuzzy':
+            warnings.append(('INFO', f"{eid}: '{name}' auto-matched to '{profile.title}'"))
+        elif method == 'unknown-same-last':
+            last = name.rsplit(' ', 1)[-1]
+            same = [p.title for p in profiles if p.last_name.lower() == last.lower()]
+            warnings.append((
+                'WARN',
+                f"{eid}: '{name}' not matched — possible alias needed for: {', '.join(same)}"
+            ))
     return warnings
 
 
@@ -389,6 +442,48 @@ def render_index_md(entry: dict, profiles: list, aliases: dict) -> str:
     return '\n'.join(lines)
 
 
+def render_talk_md(entry: dict, profiles: list, aliases: dict) -> str:
+    """Render the index.md for an event/talk entry."""
+    title = clean_latex(entry.get('title', ''))
+    talk_date = parse_date(entry.get('date', entry.get('year', '2000')))
+    today = date.today().isoformat()
+
+    raw_authors = parse_authors(entry.get('author', ''))
+    authors = [resolve_author(n, profiles, aliases)[0] for n in raw_authors]
+
+    event_name = clean_latex(entry.get('location', ''))
+    event_url = entry.get('url', entry.get('website-url', '')).strip()
+    tags = talk_tags(entry)
+    featured = entry.get('website-featured', '').strip().lower() == 'true'
+
+    url_slides = entry.get('url-slides', '').strip()
+    url_pdf = entry.get('url-pdf', '').strip()
+    url_video = entry.get('url-video', '').strip()
+
+    lines = ['---']
+    lines.append(f'title: {yaml_str(title)}')
+    lines.append(f'event: {yaml_str(event_name)}')
+    if event_url:
+        lines.append(f'event_url: {event_url}')
+    lines.append(f"date: '{talk_date}T00:00:00Z'")
+    lines.append('all_day: true')
+    lines.append(f"publishDate: '{today}'")
+    lines.append('authors:')
+    for a in authors:
+        lines.append(f'- {a}')
+    lines.append('tags:')
+    for t in tags:
+        lines.append(f'- {t}')
+    lines.append(f'featured: {"true" if featured else "false"}')
+    lines.append(f'url_slides: {yaml_str(url_slides)}')
+    lines.append(f'url_pdf: {yaml_str(url_pdf)}')
+    lines.append(f'url_video: {yaml_str(url_video)}')
+    lines.append('url_code: \'\'')
+    lines.append('---')
+    lines.append('')
+    return '\n'.join(lines)
+
+
 def reconstruct_bib(entry: dict) -> str:
     """Reconstruct a clean BibTeX entry, stripping website-specific fields."""
     skip_fields = {
@@ -425,9 +520,9 @@ def load_bib(bib_path: Path) -> list:
     return db.entries
 
 
-def process_bib(bib_path: Path, output_dir: Path, authors_dir: Path,
-                aliases_file: Path, update: bool, dry_run: bool,
-                filter_type: str, verbose: bool = True,
+def process_bib(bib_path: Path, output_dir: Path, talks_dir: Path,
+                authors_dir: Path, aliases_file: Path, update: bool,
+                dry_run: bool, filter_type: str, verbose: bool = True,
                 list_skipped: bool = False) -> None:
 
     entries = load_bib(bib_path)
@@ -483,6 +578,42 @@ def process_bib(bib_path: Path, output_dir: Path, authors_dir: Path,
         if verbose:
             print(f"  + {fname}")
 
+    # --- Talk processing ---
+    talks_created = []
+    talks_skipped_exists = []
+    talks_skipped_type = []
+
+    if talks_dir is not None:
+        for entry in entries:
+            if not should_include_talk(entry):
+                talks_skipped_type.append(entry.get('ID', '?'))
+                continue
+
+            for level, msg in validate_talk(entry, profiles, aliases):
+                all_warnings.append((level, msg))
+
+            fname = folder_name(entry)
+            dest = talks_dir / fname
+            index_path = dest / 'index.md'
+
+            if index_path.exists() and not update:
+                talks_skipped_exists.append(fname)
+                continue
+
+            talk_content = render_talk_md(entry, profiles, aliases)
+
+            if dry_run:
+                print(f"[DRY RUN] Would create talk: {dest}/")
+                print(f"  title: {clean_latex(entry.get('title', ''))}")
+                talks_created.append(fname)
+                continue
+
+            dest.mkdir(parents=True, exist_ok=True)
+            index_path.write_text(talk_content, encoding='utf-8')
+            talks_created.append(fname)
+            if verbose:
+                print(f"  + [talk] {fname}")
+
     # Print warnings grouped by level
     if verbose and all_warnings:
         # Separate by level for readability
@@ -497,17 +628,29 @@ def process_bib(bib_path: Path, output_dir: Path, authors_dir: Path,
 
     if verbose:
         print(f"\nSummary ({bib_path.name}):")
-        print(f"  Created/updated : {len(created)}")
-        print(f"  Skipped (exists): {len(skipped_exists)}")
-        print(f"  Excluded (type) : {len(skipped_type)}")
+        print(f"  Publications created/updated : {len(created)}")
+        print(f"  Publications skipped (exists): {len(skipped_exists)}")
+        print(f"  Publications excluded (type) : {len(skipped_type)}")
+        if talks_dir is not None:
+            print(f"  Talks created/updated        : {len(talks_created)}")
+            print(f"  Talks skipped (exists)       : {len(talks_skipped_exists)}")
+            print(f"  Talks excluded (type)        : {len(talks_skipped_type)}")
         if list_skipped:
             if skipped_exists:
-                print("\n  Skipped (already exist):")
+                print("\n  Publications skipped (already exist):")
                 for f in skipped_exists:
                     print(f"    ~ {f}")
             if skipped_type:
-                print("\n  Excluded (type/keyword filter):")
+                print("\n  Publications excluded (type/keyword filter):")
                 for f in skipped_type:
+                    print(f"    - {f}")
+            if talks_skipped_exists:
+                print("\n  Talks skipped (already exist):")
+                for f in talks_skipped_exists:
+                    print(f"    ~ {f}")
+            if talks_skipped_type:
+                print("\n  Talks excluded (type/keyword filter):")
+                for f in talks_skipped_type:
                     print(f"    - {f}")
         if skipped_exists:
             print("\n  Use --update to overwrite existing entries.")
@@ -518,8 +661,9 @@ def main():
     #   ~/Documents/merson-biosketch-new-template/sections/publications.bib  (source of truth)
     #   ~/code/laces/                                                         (Hugo site root)
     repo_dir = Path(__file__).parent
-    default_bib    = Path('~/Documents/merson-biosketch-new-template/sections/publications.bib')
-    default_out    = repo_dir / 'content/publication'
+    default_bib     = Path('~/Documents/merson-biosketch-new-template/sections/publications.bib')
+    default_out     = repo_dir / 'content/publication'
+    default_talks   = repo_dir / 'content/event'
     default_authors = repo_dir / 'content/authors'
     default_aliases = repo_dir / 'author_aliases.yaml'
 
@@ -534,6 +678,10 @@ def main():
     parser.add_argument('output_dir', nargs='?',
                         default=str(default_out),
                         help=f'Output directory (default: {default_out})')
+    parser.add_argument('--talks-dir',
+                        default=str(default_talks),
+                        help=f'Output directory for talks (default: {default_talks}). '
+                             f'Pass empty string to skip talk generation.')
     parser.add_argument('--authors-dir',
                         default=str(default_authors),
                         help=f'Hugo authors directory (default: {default_authors})')
@@ -557,12 +705,16 @@ def main():
         sys.exit(1)
 
     output_dir = Path(args.output_dir).expanduser()
+    talks_dir = Path(args.talks_dir).expanduser() if args.talks_dir else None
     if not args.dry_run:
         output_dir.mkdir(parents=True, exist_ok=True)
+        if talks_dir:
+            talks_dir.mkdir(parents=True, exist_ok=True)
 
     process_bib(
         bib_path=bib_path,
         output_dir=output_dir,
+        talks_dir=talks_dir,
         authors_dir=Path(args.authors_dir).expanduser(),
         aliases_file=Path(args.aliases_file).expanduser(),
         update=args.update,

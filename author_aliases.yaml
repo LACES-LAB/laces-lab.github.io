@@ -14,6 +14,7 @@
 "Merson, J.": "Jacob Merson"
 "Merson, J. S.": "Jacob Merson"
 "J. Merson": "Jacob Merson"
+"J.S. Merson": "Jacob Merson"
 
 # Fuad Hasan — bib uses short form, profile first_name is "Md Fuad Hasibul"
 "Fuad Hasan": "Fuad Hasan"
@@ -22,6 +23,9 @@
 # Zachary Knowlan
 "Zachary Knowlan": "Zachary Knowlan"
 "Z. Knowlan": "Zachary Knowlan"
+
+# Rifat Hossain — bib uses short form, profile title is "Md Rifat Hossain"
+"Rifat Hossain": "Md Rifat Hossain"
 
 # Catalin Picu
 "R. C. Picu": Catalin R. Picu
