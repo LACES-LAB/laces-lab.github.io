@@ -5,10 +5,17 @@ draft: false
 publishDate: '2026-02-28'
 authors:
 - Jacob Merson
-- R. C. Picu
+- Catalin R. Picu
 publication_types:
 - 'article-journal'
-abstract: 
+abstract: >
+  This article presents the displacement field produced by a point force acting on an
+  athermal random fiber network (the Green function for the network). The problem is defined
+  within the limits of linear elasticity, and the field is obtained numerically for
+  nonaffine networks characterized by various parameter sets. The classical Green function
+  solution applies at distances from the point force larger than a threshold which is
+  independent of the network parameters in the range studied. At smaller distances, the
+  nonlocal nature of fiber interactions modifies the solution.
 featured: false
 publication: 'Journal of Applied Mechanics'
 doi: 10.1115/1.4053329

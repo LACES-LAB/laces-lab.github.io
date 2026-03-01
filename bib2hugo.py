@@ -269,7 +269,7 @@ def should_include(entry: dict) -> bool:
     etype = entry.get('ENTRYTYPE', '').lower()
     kws = get_keywords(entry)
     if etype == 'article':
-        return 'journal' in kws
+        return 'journal' in kws and 'inprep' not in kws
     if etype in ('inproceedings', 'incollection', 'proceedings'):
         return True
     if etype == 'misc':
