@@ -1,0 +1,91 @@
+{{ define "main" }}
+
+{{/* Partition talks into three groups by tag */}}
+{{ $invited    := where .Pages "Params.tags" "intersect" (slice "invited") }}
+{{ $contributed := where .Pages "Params.tags" "intersect" (slice "contributed") }}
+{{ $posters    := where .Pages "Params.tags" "intersect" (slice "poster") }}
+
+<div class="mx-auto max-w-2xl">
+  <div class="prose pb-4">
+    <h1>Talks &amp; Presentations</h1>
+  </div>
+
+  {{ $sections := slice
+      (dict "label" "Invited Talks"            "pages" $invited)
+      (dict "label" "Contributed Presentations" "pages" $contributed)
+      (dict "label" "Posters"                  "pages" $posters)
+  }}
+
+  {{ range $sections }}
+    {{ $pages := .pages }}
+    {{ if gt (len $pages) 0 }}
+    <div class="mt-8">
+      <h2 class="text-xl font-bold border-b border-gray-300 pb-1 mb-2">{{ .label }}</h2>
+      <div class="text-sm sm:text-lg">
+        {{ range sort $pages "Date" "desc" }}
+        <div class="py-2 flex flex-row">
+          <div>
+            {{/* Authors */}}
+            {{ if .Params.authors }}
+            <div class="inline">
+              {{ $authors := .Params.authors }}
+              {{ range $i, $author := $authors }}
+                {{- $is_me := strings.Contains (lower $author) "merson" -}}
+                <div class="inline {{ if $is_me }}font-bold{{ end }}">
+                  {{- $author -}}
+                  {{- if ne (add $i 1) (len $authors) -}},&nbsp;{{ end }}
+                </div>
+              {{ end }}
+            </div>
+            {{ end }}
+            {{/* Year */}}
+            <div class="inline">&nbsp;({{ .Date.Format "2006" }}).</div>
+            {{/* Title */}}
+            <div class="inline">&nbsp;"{{ .Title }}".</div>
+            {{/* Event */}}
+            {{ if .Params.event }}
+            <div class="inline italic">&nbsp;{{ .Params.event }}.</div>
+            {{ end }}
+            {{/* Buttons */}}
+            {{ if or .Params.event_url .Params.url_slides .Params.url_pdf .Params.url_video }}
+            <div class="space-x-1 mt-1">
+              {{ if .Params.event_url }}
+              <a href="{{ .Params.event_url }}">
+                <button class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs mb-2 sm:mb-0">
+                  Event
+                </button>
+              </a>
+              {{ end }}
+              {{ if .Params.url_slides }}
+              <a href="{{ .Params.url_slides }}">
+                <button class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs mb-2 sm:mb-0">
+                  Slides
+                </button>
+              </a>
+              {{ end }}
+              {{ if .Params.url_pdf }}
+              <a href="{{ .Params.url_pdf }}">
+                <button class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs mb-2 sm:mb-0">
+                  PDF
+                </button>
+              </a>
+              {{ end }}
+              {{ if .Params.url_video }}
+              <a href="{{ .Params.url_video }}">
+                <button class="outline outline-rpi-dark-red-75 outline-2 hover:bg-rpi-dark-gray hover:text-gray-300 text-rpi-dark-red-75 font-bold py-1 px-2 rounded text-xs mb-2 sm:mb-0">
+                  Video
+                </button>
+              </a>
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  {{ end }}
+
+</div>
+{{ end }}
