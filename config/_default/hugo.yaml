@@ -56,6 +56,9 @@ related:
       weight: 100
     - name: categories
       weight: 70
+services:
+  googleAnalytics:
+    id: 'G-VZ0W0G2MRZ'
 security:
   _merge: deep
 sitemap:
