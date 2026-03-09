@@ -45,7 +45,6 @@ header:
 
 footer:
   copyright:
-    notice: '© {year} Jacob Merson. This work is licensed under {license}'
     notice: '© {year} Jacob Merson.'
     license:
       enable: false
